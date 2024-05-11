@@ -8,7 +8,15 @@ const STUDENT = new Schema({
     currentSemester : Number,
     profilePic : String,
     subjects : Object,
-    Address : String
+    Address : String,
+    gender:String,
+    branch:String,
+    subject1:String,
+    subject2:String,
+    subject3:String,
+    subject4:String,
+    subject5:String,
+    rollNumber:String
 },{
     timestamps:true
 });

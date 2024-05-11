@@ -2,6 +2,7 @@ const { model, Schema, Model } = require("mongoose");
 const mongoose = require('mongoose');
 
 const ATTENDANCE = new Schema({
+    
     studentID : mongoose.Schema.ObjectId,
     subject1Name : String,
     subject1Attendance  : Number,

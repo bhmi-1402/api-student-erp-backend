@@ -3,7 +3,7 @@ const router = express.Router();
 const bcrypt = require("bcrypt");
 
 const userModel = require("./../schema/student");
-const attendanceModel = require('./../schema/attendance');
+const attendanceModel = require('./../schema/attendence');
 const classModel = require('./../schema/class');
 
 

@@ -4,6 +4,8 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const studentRouter = require('./routes/student')
 const teacherRouter = require('./routes/teacher')
+const adminRouter = require('./routes/admin');
+
 const cors = require('cors');
 const connectdb  = require('./config/connectDB');
 
@@ -19,6 +21,7 @@ app.use(cookieParser());
 
 app.use('/student',studentRouter);
 app.use('/teacher',teacherRouter);
+app.use('/admin',adminRouter);
 
 // Route
 
