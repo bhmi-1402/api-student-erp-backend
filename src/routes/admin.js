@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcrypt");
 const studentModel = require("./../schema/student");
-const teacherModel = require("./../schema/student");
+const teacherModel = require("./../schema/teacher");
 const attendanceModel = require('./../schema/attendence');
 
 router.post('/addToTeachers',async (req,res)=>{
@@ -10,12 +10,11 @@ router.post('/addToTeachers',async (req,res)=>{
     try{
         const salt=await bcrypt.genSalt(10);
         const hashed=await bcrypt.hash(password,salt);
-        const id =await teacherModel.create({
+        const id = await teacherModel.create({
             name,
             email,
             password:hashed,
             lectures
-
         });
         res.send(id);
     }
