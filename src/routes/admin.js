@@ -5,8 +5,25 @@ const studentModel = require("./../schema/student");
 const teacherModel = require("./../schema/student");
 const attendanceModel = require('./../schema/attendence');
 
-router.post('/addToTeachers',(req,res)=>{
+router.post('/addToTeachers',async (req,res)=>{
     const {name,email,password,lectures} = req.body;
+    try{
+        const salt=await bcrypt.genSalt(10);
+        const hashed=await bcrypt.hash(password,salt);
+        const id =await teacherModel.create({
+            name,
+            email,
+            password:hashed,
+            lectures
+
+        });
+        res.send(id);
+    }
+    catch(error){
+        console.log(error);
+        res.send({success:false,message:"Error"});
+    }
+
 })
 
 router.post('/addToStudents',async (req,res)=>{
