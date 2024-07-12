@@ -9,7 +9,8 @@ const adminRouter = require('./routes/admin');
 const cors = require('cors');
 const connectdb  = require('./config/connectDB');
 
-connectdb();
+
+connectdb.connectPGDB();
 
 const app = express();
 

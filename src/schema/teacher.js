@@ -6,7 +6,6 @@ const TEACHER = new Schema({
     email : String,
     password : String,
     lectures : [Object],
-    
 },{
     timestamps:true
 });
