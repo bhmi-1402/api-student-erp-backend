@@ -7,10 +7,10 @@ const teacherRouter = require('./routes/teacher')
 const adminRouter = require('./routes/admin');
 
 const cors = require('cors');
-const connectdb  = require('./config/connectDB');
+const Connect  = require('./config/connectDB');
 
 
-connectdb.connectdb();
+Connect.connectdb();
 
 const app = express();
 
