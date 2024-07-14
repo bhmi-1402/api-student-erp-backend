@@ -18,11 +18,10 @@ const connectdb = () => {
 }
 
 const connectPGDB = ()=>{
-    
     const client = new Client("postgresql://Student%20ERP%20Test_owner:L2bo3jDcEYaq@ep-white-violet-a1x7wbqt.ap-southeast-1.aws.neon.tech/Student%20ERP%20Test?sslmode=require")
     client.connect(function(err) {
         if (err) throw err;
-        console.log("Connected!");
+        console.log("POSTGRES Connected!");
     });      
 
     var query = client.query("select * from students",(err,res)=>{
@@ -32,7 +31,6 @@ const connectPGDB = ()=>{
             console.log(res?.rows);
         }
     });
-
 }
 
 module.exports = {connectPGDB,connectdb};

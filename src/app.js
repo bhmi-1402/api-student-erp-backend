@@ -10,7 +10,7 @@ const cors = require('cors');
 const connectdb  = require('./config/connectDB');
 
 
-connectdb.connectPGDB();
+connectdb.connectdb();
 
 const app = express();
 

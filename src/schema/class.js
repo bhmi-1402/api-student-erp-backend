@@ -2,9 +2,11 @@ const { model, Schema, Model } = require("mongoose");
 const mongoose = require('mongoose');
 
 const CLASS = new Schema({
-    name : String,
-    students : [mongoose.Schema.ObjectId],
-    semester : Number
+    Name : String,
+    Alias : String,
+    Students : [mongoose.Schema.ObjectId],
+    Semester : Number,
+    Subjects : [Object]
 },{
     timestamps:true
 });
