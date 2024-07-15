@@ -9,22 +9,10 @@ const Subjects = require("../schema/Subjects");
 const Class = require('../schema/class');
 
 router.post("/addToTeachers", async (req, res) => {
-  const { FullName, Email, Password, Gender, isAdmin, PhoneNumber } = req.body;
+  const { FullName, Email, Password, Gender, isAdmin, PhoneNumber,Lectures} = req.body;
 
   try {
-    if (
-      !FullName ||
-      !Email ||
-      !Password ||
-      !Gender ||
-      !isAdmin ||
-      !PhoneNumber
-    ) {
-      res.send({
-        error: true,
-        message: "Some Fields are missing ! send all data ",
-      });
-    }
+    
     const salt = await bcrypt.genSalt(10);
     const hash = await bcrypt.hash(Password, salt);
     const id = await teacherModel.create({
@@ -34,6 +22,7 @@ router.post("/addToTeachers", async (req, res) => {
       Gender,
       isAdmin,
       PhoneNumber,
+      Lectures
     });
     res.send(id);
   } catch (error) {
@@ -125,6 +114,25 @@ router.post('/addClass',async (req,res)=>{
   }
 })
 
+router.get('/class',async (req,res)=>{
+  try{
+    
+    const response = await Class.find();
+    res.send(response);
+
+  }catch(Err){
+    console.log(Err);
+  }
+})
+
+router.get('/fetchSubjects',(req,res)=>{
+  try{
+    const {id} = req.query;
+    console.log(id);
+  }catch(err){
+    console.log(err);
+  }
+})
 router.get('/subject', async (req,res)=>{
   try{
     const data = await Subjects.find();
