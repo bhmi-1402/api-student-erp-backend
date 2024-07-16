@@ -5,13 +5,10 @@ const logger = require('morgan');
 const studentRouter = require('./routes/student')
 const teacherRouter = require('./routes/teacher')
 const adminRouter = require('./routes/admin');
-
 const cors = require('cors');
 const Connect  = require('./config/connectDB');
-
-
+const Student = require('./schema/student');
 Connect.connectdb();
-
 const app = express();
 
 app.use(cors());

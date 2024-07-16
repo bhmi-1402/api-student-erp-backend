@@ -2,29 +2,21 @@ const { model, Schema, Model } = require("mongoose");
 const mongoose = require('mongoose');
 
 const ATTENDANCE = new Schema({
-    
-    StudentID : mongoose.Schema.ObjectId,
-    
-    subject1Name : String,
-    subject1Attendance  : Number,
-    subject1total  : Number,
-
-    subject2Name : String,
-    subject2Attendance  : Number,
-    subject2total  : Number,
-
-    subject3Name : String,
-    subject3Attendance  : Number,
-    subject3total  : Number,
-
-    subject4Name : String,
-    subject4Attendance  : Number,
-    subject4total  : Number,
-
-    subject5Name : String,
-    subject5Attendance  : Number,
-    subject5total  : Number,
-    
+    StudentId:mongoose.Schema.ObjectId,
+    Semester:Number,
+    SubjectId:mongoose.Schema.ObjectId,
+    SubjectName:String,
+    TeacherId:mongoose.Schema.ObjectId,
+    BranchName:String,
+    BranchId:mongoose.Schema.ObjectId,
+    Presents:{
+        type:Number,
+        default:0
+    },
+    TotalClasses:{
+        type:Number,
+        default:0
+    }
 },{
     timestamps:true
 });

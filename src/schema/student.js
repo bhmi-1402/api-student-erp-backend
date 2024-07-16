@@ -7,13 +7,13 @@ const STUDENT = new Schema({
     Password : String,
     CurrentSemester : Number,
     profilePic : String,
-    Class : mongoose.Schema.ObjectId,
-    Address : String,
     Gender: String,
+    Address : String,
     Branch:String,
     RollNumber:String,
     DateOfBirth:Date,
     PhoneNumber:Number
+    
 },{
     timestamps:true
 });

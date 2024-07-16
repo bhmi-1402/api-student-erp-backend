@@ -15,7 +15,7 @@ router.post("/login", async (req, res) => {
     if (!isMatch) {
       return res.json({ success: false, message: "Invalid credentials " });
     }
-    res.send(user);
+    res.send({success:true,user:user});
   } catch (error) {
     console.log(error);
     res.json({ success: false, message: "Error" });

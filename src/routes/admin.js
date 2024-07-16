@@ -35,7 +35,7 @@ router.post("/addToStudents", async (req, res) => {
   const {
     FullName,
     Email,
-    Password: hash,
+    Password,
     CurrentSemester,
     Class,
     Address,
@@ -48,7 +48,7 @@ router.post("/addToStudents", async (req, res) => {
 
   try {
     const salt = await bcrypt.genSalt(10);
-    const hash = await bcrypt.hash(password, salt);
+    const hash = await bcrypt.hash(Password, salt);
 
     const resp = await studentModel.create({
       FullName,
@@ -144,3 +144,16 @@ router.get('/subject', async (req,res)=>{
 })
 
 module.exports = router;
+
+
+
+
+
+
+
+
+
+
+/** 
+* Paste one or more documents here
+*/

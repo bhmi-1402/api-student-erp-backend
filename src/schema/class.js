@@ -7,8 +7,6 @@ const CLASS = new Schema({
     Students : [mongoose.Schema.ObjectId],
     Semester : Number,
     Subjects : [Object]
-},{
-    timestamps:true
 });
 
 const Class = new model("Class",CLASS);
