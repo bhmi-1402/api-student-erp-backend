@@ -9,5 +9,5 @@ const COMPLAINTS = new Schema({
     timestamps : true
 });
 
-const Complaints = new model("Class",COMPLAINTS);
+const Complaints = new model("Complaints",COMPLAINTS);
 module.exports = Complaints;

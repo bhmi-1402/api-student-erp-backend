@@ -2,13 +2,13 @@ const { model, Schema, Model } = require("mongoose");
 const mongoose = require('mongoose');
 
 const ATTENDANCE = new Schema({
-    StudentId:mongoose.Schema.ObjectId,
+    StudentId:String,
     Semester:Number,
-    SubjectId:mongoose.Schema.ObjectId,
+    SubjectId:String,
     SubjectName:String,
-    TeacherId:mongoose.Schema.ObjectId,
+    TeacherId:String,
     BranchName:String,
-    BranchId:mongoose.Schema.ObjectId,
+    BranchId:String,
     Presents:{
         type:Number,
         default:0

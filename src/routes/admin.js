@@ -6,13 +6,16 @@ const teacherModel = require("./../schema/teacher");
 const attendanceModel = require("./../schema/attendence");
 const Student = require("./../schema/student");
 const Subjects = require("../schema/Subjects");
-const Class = require('../schema/class');
+const Class = require("../schema/class");
+const NOTICE = require("../schema/Notice");
+const { route } = require("./student");
+const Complaints = require("../schema/Complaints");
 
 router.post("/addToTeachers", async (req, res) => {
-  const { FullName, Email, Password, Gender, isAdmin, PhoneNumber,Lectures} = req.body;
+  const { FullName, Email, Password, Gender, isAdmin, PhoneNumber, Lectures } =
+    req.body;
 
   try {
-    
     const salt = await bcrypt.genSalt(10);
     const hash = await bcrypt.hash(Password, salt);
     const id = await teacherModel.create({
@@ -22,7 +25,7 @@ router.post("/addToTeachers", async (req, res) => {
       Gender,
       isAdmin,
       PhoneNumber,
-      Lectures
+      Lectures,
     });
     res.send(id);
   } catch (error) {
@@ -84,76 +87,113 @@ router.post("/addToStudents", async (req, res) => {
 });
 
 router.post("/addSubject", async (req, res) => {
-  try{
-    const {subjectName , alias } = req.body;
+  try {
+    const { subjectName, alias } = req.body;
     const resp = await Subjects.create({
-      Name : subjectName,
-      Alias : alias 
+      Name: subjectName,
+      Alias: alias,
     });
 
     res.send(resp);
-
-  }catch(err){
+  } catch (err) {
     console.log(err);
     res.send({
-      error : true,
-      message : "Error At Backend"
-    })
+      error: true,
+      message: "Error At Backend",
+    });
   }
 });
 
-router.post('/addClass',async (req,res)=>{
-  try{
-    const {Name,Subjects,Semester,Alias} = req.body;
+router.post("/addClass", async (req, res) => {
+  try {
+    const { Name, Subjects, Semester, Alias } = req.body;
     const resp = await Class.create({
-      Name,Semester,Subjects,Alias
-    })
+      Name,
+      Semester,
+      Subjects,
+      Alias,
+    });
     res.send(resp);
-  }catch(err){
+  } catch (err) {
     console.log(err);
   }
-})
+});
 
-router.get('/class',async (req,res)=>{
-  try{
-    
+router.get("/class", async (req, res) => {
+  try {
     const response = await Class.find();
     res.send(response);
-
-  }catch(Err){
+  } catch (Err) {
     console.log(Err);
   }
-})
+});
 
-router.get('/fetchSubjects',(req,res)=>{
-  try{
-    const {id} = req.query;
+router.get("/fetchSubjects", (req, res) => {
+  try {
+    const { id } = req.query;
     console.log(id);
-  }catch(err){
+  } catch (err) {
     console.log(err);
   }
-})
-router.get('/subject', async (req,res)=>{
-  try{
+});
+router.get("/subject", async (req, res) => {
+  try {
     const data = await Subjects.find();
     res.send(data);
-  }catch(err){
+  } catch (err) {
     console.log(err);
-    res.send({error : true,message : "Unable to fetch,Database down"});
+    res.send({ error: true, message: "Unable to fetch,Database down" });
+  }
+});
+
+router.post("/notice", async (req, res) => {
+  try {
+    const { Title, Body, Sender } = req.body;
+    await NOTICE.create({
+      Title, Body, Sender 
+    });
+    res.send({success:true});
+  } catch (err) {
+    res.send({success:false});
+    console.log(err);
+  }
+});
+
+router.post('/complaint',async (req, res) => {
+  try {
+    const { Title, Body, Sender } = req.body;
+    await Complaints.create({
+      Title, Body, Sender 
+    });
+    res.send({success:true});
+  } catch (err) {
+    res.send({success:false});
+    console.log(err);
+  }
+});
+
+router.get('/notice',async (req, res) => {
+  try {
+    const response = await NOTICE.find();
+    res.send(response);
+  } catch (err) {
+    res.send({success:false});
+    console.log(err);
+  }
+});
+
+router.get('/complaint',async (req,res)=>{
+  try {
+    const response = await Complaints.find();
+    res.send(response);
+  } catch (err) {
+    res.send({success:false});
+    console.log(err);
   }
 })
 
 module.exports = router;
 
-
-
-
-
-
-
-
-
-
-/** 
-* Paste one or more documents here
-*/
+/**
+ * Paste one or more documents here
+ */

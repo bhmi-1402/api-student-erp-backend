@@ -3,15 +3,16 @@ const router = express.Router();
 const bcrypt = require("bcrypt");
 const userModel = require("./../schema/student");
 const attendanceModel = require('./../schema/attendence');
+const { default: mongoose } = require("mongoose");
 
 router.post("/login", async (req, res) => {
-  const { email, password } = req.body;
+  const { Email, Password } = req.body;
   try {
-    const user = await userModel.findOne({ email });
+    const user = await userModel.findOne({ Email });
     if (!user) {
       return res.json({ success: false, message: "User doesn't exist" });
     }
-    const isMatch = await bcrypt.compare(password, user.password);
+    const isMatch = await bcrypt.compare(Password, user.Password);
     if (!isMatch) {
       return res.json({ success: false, message: "Invalid credentials " });
     }
@@ -22,11 +23,13 @@ router.post("/login", async (req, res) => {
   }
 });
 
-
 router.post('/attendance', async (req,res)=>{
+        const {id,sem} = req.body;
         try{
-            const {id} = req.body;
-            const attendanceData = await attendanceModel.findById(id);
+            const attendanceData = await attendanceModel.findById({
+              StudentId : id,
+              Semester : sem
+            });
             res.send(attendanceData);
         }catch(err){
             console.log(err,"Some Error Occured in Attendance Route of Student ");

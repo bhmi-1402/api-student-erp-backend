@@ -51,13 +51,14 @@ router.post('/addResult',(req,res)=>{
 })
 
 router.post("/login", async (req, res) => {
-    const { email, password } = req.body;
+    const { Email, Password } = req.body;
+    console.log(Email,Password);
     try {
-      const user = await userModel.findOne({ email });
+      const user = await userModel.findOne({ Email });
       if (!user) {
         return res.json({ success: false, message: "User doesn't exist" });
       }
-      const isMatch = await bcrypt.compare(password, user.password);
+      const isMatch = await bcrypt.compare(Password, user.Password);
       if (!isMatch) {
         return res.json({ success: false, message: "Invalid credentials " });
       }
@@ -100,5 +101,4 @@ router.post('/markAttendance',async (req,res)=>{
     }
 })  
   
-
 module.exports = router;

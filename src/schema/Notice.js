@@ -9,5 +9,5 @@ const Notice = new Schema({
     timestamps : true
 });
 
-const NOTICE = new model("Class",Notice);
+const NOTICE = new model("Notice",Notice);
 module.exports = NOTICE;
