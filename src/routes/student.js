@@ -4,6 +4,7 @@ const bcrypt = require("bcrypt");
 const userModel = require("./../schema/student");
 const attendanceModel = require('./../schema/attendence');
 const { default: mongoose } = require("mongoose");
+const Result = require('./../schema/Result')
 
 router.post("/login", async (req, res) => {
   const { Email, Password } = req.body;
@@ -26,7 +27,7 @@ router.post("/login", async (req, res) => {
 router.post('/attendance', async (req,res)=>{
         const {id,sem} = req.body;
         try{
-            const attendanceData = await attendanceModel.findById({
+            const attendanceData = await attendanceModel.find({
               StudentId : id,
               Semester : sem
             });
@@ -34,6 +35,20 @@ router.post('/attendance', async (req,res)=>{
         }catch(err){
             console.log(err,"Some Error Occured in Attendance Route of Student ");
         }
+})
+
+router.post('/marks', async (req,res)=>{
+  const {id,sem} = req.body;
+  try{
+      console.log(id,sem);
+      const marksData = await Result.find({
+        StudentId : id,
+        Semester : sem
+      });
+      res.send(marksData);
+  }catch(err){
+      console.log(err,"Some Error Occured in Attendance Route of Student ");
+  }
 })
 
 module.exports = router;

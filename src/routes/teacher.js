@@ -10,10 +10,7 @@ const Attendance = require("./../schema/attendence");
 
 const addResult = async (StudentId,TeacherId,Subject,TotalMarks,ObtainedMarks,Semester)=>{
     try{
-        
-        if(!ObtainedMarks) ObtainedMarks = 0;
-        if(!TotalMarks) TotalMarks = 100;
-
+        console.log(ObtainedMarks,typeof(ObtainedMarks));
         await Result.create({
             StudentId,TeacherId,Subject,TotalMarks,ObtainedMarks,Semester
         })
@@ -42,7 +39,7 @@ router.post('/addResult',(req,res)=>{
     try{
         const {Students,TeacherId,Subject,TotalMarks,Semester} = req.body;
         Students.forEach(stu => {
-            addResult(stu._id,TeacherId,Subject,TotalMarks,stu.ObtainedMarks,Semester);
+            addResult(stu._id,TeacherId,Subject,TotalMarks,stu.obtainedMarks,Semester);
         });
         res.send("Result is being Updated.Please Check after some time")
     }catch(err){
