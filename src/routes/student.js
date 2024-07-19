@@ -23,7 +23,15 @@ router.post("/login", async (req, res) => {
     res.json({ success: false, message: "Error" });
   }
 });
-
+router.get('/login/guest',async(req,res)=>{
+  try {
+    const user = await userModel.findOne({ isGuest : true});
+    res.send({success:true,user:user});
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: "Error" });
+  }
+})
 router.post('/attendance', async (req,res)=>{
         const {id,sem} = req.body;
         try{
@@ -35,7 +43,7 @@ router.post('/attendance', async (req,res)=>{
         }catch(err){
             console.log(err,"Some Error Occured in Attendance Route of Student ");
         }
-})
+});
 
 router.post('/marks', async (req,res)=>{
   const {id,sem} = req.body;

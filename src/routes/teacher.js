@@ -66,6 +66,16 @@ router.post("/login", async (req, res) => {
     }
   });
 
+  router.get("/login/guest", async (req, res) => {
+    try {
+      const user = await userModel.findOne({ isGuest : true});
+      res.send({success:true,user:user});
+    } catch (error) {
+      console.log(error);
+      res.json({ success: false, message: "Error" });
+    }
+  });
+
 const markAttendance = async(StudentId,Semester,SubjectId,SubjectName,TeacherId,BranchName,BranchId)=>{
     try{
         const attendanceModel = await Attendance.findOne({StudentId,Semester,SubjectId});
